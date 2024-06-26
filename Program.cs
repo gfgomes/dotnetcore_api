@@ -43,6 +43,35 @@ app.MapGet("/products/{id}", ([FromRoute] int id, AplicationDbContext dbContext)
     return Results.NotFound();
 });
 
+app.MapPut("/products/{id}", ([FromRoute] int id,ProductRequest productRequest ,AplicationDbContext dbContext) =>
+{
+    var product = dbContext.Products
+    .Include(p => p.Tags)
+    .Where(p => p.Id == id).First();
+
+    if(product == null){    
+        return Results.NotFound();
+    }
+    product.Code = productRequest.Code;
+    product.Name = productRequest.Name;
+    product.Description = productRequest.Description;
+    product.Category = dbContext.Categories.Where(c => c.Id == productRequest.CategoryId).First();
+    product.Tags = new List<Tag>();
+
+    if(productRequest.Tags != null){
+        product.Tags = new List<Tag>();
+        foreach (var tag in productRequest.Tags){   
+            product.Tags.Add(item: new Tag{Name = tag});
+        }    
+    }
+   
+    dbContext.SaveChanges();
+    return Results.Ok(product);
+});
+
+
+
+
 
 app.MapGet("/", () => "Hello World 3!");
 app.MapGet("/user", () => new { name = "John", age = 30 });
