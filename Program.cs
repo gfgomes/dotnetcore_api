@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddSqlServer<AplicationDbContext>(builder.Configuration["Database:SqlServer"]);
@@ -6,9 +7,7 @@ builder.Services.AddSqlServer<AplicationDbContext>(builder.Configuration["Databa
 var app = builder.Build();
 var configuration = app.Configuration;
 
-//Console.WriteLine(configuration["Database:SqlServer"]);
 
-//{ "Code":1, "Name": "HD SSD"}
 app.MapPost("/products", (ProductRequest productRequest, AplicationDbContext dbContext) =>
 {
     var caregory = dbContext.Categories.Where(c => c.Id == productRequest.CategoryId).First();
@@ -32,6 +31,18 @@ app.MapPost("/products", (ProductRequest productRequest, AplicationDbContext dbC
     
 });
 
+app.MapGet("/products/{id}", ([FromRoute] int id, AplicationDbContext dbContext) =>
+{
+    var product = dbContext.Products
+    .Include(p => p.Category)
+    .Include(p => p.Tags)
+    .Where(p => p.Id == id).First();
+    if(product != null){
+        return Results.Ok(product);
+    }
+    return Results.NotFound();
+});
+
 
 app.MapGet("/", () => "Hello World 3!");
 app.MapGet("/user", () => new { name = "John", age = 30 });
@@ -44,18 +55,12 @@ app.MapGet("/addheader", (HttpResponse response) =>
 
 });
 
-
-
-
 app.MapGet("/getproducts", ([FromQuery] string name, [FromQuery] string code) =>
 {
     return new { name, code };
 });
 
-app.MapGet("/getproducts/{code}", ([FromRoute] string code) =>
-{
-    return new { code };
-});
+
 
 
 app.MapGet("/getproductbyheader", (HttpRequest request) =>
