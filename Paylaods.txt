@@ -1,0 +1,9 @@
+{"email": "gabriel.fgomess@gmail.com", "password": "12345"}
+
+{
+    "Code": "5",
+    "Name": "HDD++",
+    "Description": "teste",
+    "CategoryId": "1",
+    "Tags": {}
+}

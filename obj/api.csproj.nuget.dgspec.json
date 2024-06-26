@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\dev\\playground\\repos\\dotnet\\dotnetcore_api\\api.csproj": {}
+    "d:\\dev\\playground\\repos\\dotnet\\dotnetcore_api\\api.csproj": {}
   },
   "projects": {
-    "D:\\dev\\playground\\repos\\dotnet\\dotnetcore_api\\api.csproj": {
+    "d:\\dev\\playground\\repos\\dotnet\\dotnetcore_api\\api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\dev\\playground\\repos\\dotnet\\dotnetcore_api\\api.csproj",
+        "projectUniqueName": "d:\\dev\\playground\\repos\\dotnet\\dotnetcore_api\\api.csproj",
         "projectName": "api",
-        "projectPath": "D:\\dev\\playground\\repos\\dotnet\\dotnetcore_api\\api.csproj",
+        "projectPath": "d:\\dev\\playground\\repos\\dotnet\\dotnetcore_api\\api.csproj",
         "packagesPath": "C:\\Users\\Gabriel\\.nuget\\packages\\",
-        "outputPath": "D:\\dev\\playground\\repos\\dotnet\\dotnetcore_api\\obj\\",
+        "outputPath": "d:\\dev\\playground\\repos\\dotnet\\dotnetcore_api\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Gabriel\\AppData\\Roaming\\NuGet\\NuGet.Config",
