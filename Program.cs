@@ -18,6 +18,13 @@ app.MapPost("/products", (ProductRequest productRequest, AplicationDbContext dbC
         Description = productRequest.Description,
         Category = caregory
     };
+
+    if(productRequest.Tags != null){
+        product.Tags = new List<Tag>();
+        foreach (var tag in productRequest.Tags){
+            product.Tags.Add(new Tag{Name = tag});
+        }
+    }
     dbContext.Products.Add(product);
     dbContext.SaveChanges();
 
